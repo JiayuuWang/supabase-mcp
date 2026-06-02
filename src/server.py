@@ -13,7 +13,7 @@ from dedalus_mcp import MCPServer
 from dedalus_mcp.server import TransportSecuritySettings
 
 from db import db_tools, supabase
-from management import management_tools, supabase_mgmt
+from management import mgmt_tools, supabase_mgmt
 from smoke import smoke_tools
 
 
@@ -37,5 +37,5 @@ async def main() -> None:
     """Start MCP server."""
     server = create_server()
     _disable_auto_output_schemas(server)
-    server.collect(*smoke_tools, *db_tools, *management_tools)
+    server.collect(*smoke_tools, *db_tools, *mgmt_tools)
     await server.serve(port=8080)

@@ -17,6 +17,10 @@ from management import management_tools, supabase_mgmt
 from smoke import smoke_tools
 
 
+def _disable_auto_output_schemas(server: MCPServer) -> None:
+    server.tools._build_output_schema = lambda _fn: None
+
+
 def create_server() -> MCPServer:
     """Create MCP server with current env config."""
     as_url = os.getenv("DEDALUS_AS_URL", "https://as.dedaluslabs.ai")
@@ -32,5 +36,6 @@ def create_server() -> MCPServer:
 async def main() -> None:
     """Start MCP server."""
     server = create_server()
+    _disable_auto_output_schemas(server)
     server.collect(*smoke_tools, *db_tools, *management_tools)
     await server.serve(port=8080)

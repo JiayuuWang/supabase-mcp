@@ -17,7 +17,7 @@ from dedalus_mcp.types import ToolAnnotations
 
 supabase_mgmt = Connection(
     name="supabase-mcp-mgmt",
-    secrets=SecretKeys(access_token="SUPABASE_ACCESS_TOKEN"),
+    secrets=SecretKeys(token="SUPABASE_ACCESS_TOKEN"),
     base_url="https://api.supabase.com/v1",
     auth_header_format="Bearer {api_key}",
 )

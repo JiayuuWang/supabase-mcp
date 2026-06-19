@@ -131,7 +131,7 @@ async def main() -> int:
 
     creds = [
         SecretValues(supabase, key=SUPABASE_SECRET_KEY),
-        SecretValues(supabase_mgmt, access_token=SUPABASE_ACCESS_TOKEN),
+        SecretValues(supabase_mgmt, token=SUPABASE_ACCESS_TOKEN),
     ]
 
     client = AsyncDedalus(

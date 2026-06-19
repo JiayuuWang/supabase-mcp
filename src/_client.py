@@ -22,7 +22,7 @@ Required environment variables:
 Optional:
     DEDALUS_API_URL   Override Dedalus API base (default https://api.dedaluslabs.ai)
     DEDALUS_AS_URL    Override Dedalus AS base  (default https://as.dedaluslabs.ai)
-    MCP_SERVER_SLUG   Marketplace slug (default JiayuuWang/supabase-mcp)
+    MCP_SERVER_SLUG   Marketplace slug (default JiayuWang/supabase-mcp)
     SUPABASE_TEST_REF Supabase project ref for management tools
 
 Usage:
@@ -47,7 +47,7 @@ DEDALUS_AS_URL = os.getenv("DEDALUS_AS_URL", "https://as.dedaluslabs.ai")
 SUPABASE_SECRET_KEY = os.getenv("SUPABASE_SECRET_KEY", "")
 SUPABASE_ACCESS_TOKEN = os.getenv("SUPABASE_ACCESS_TOKEN", "")
 SUPABASE_TEST_REF = os.getenv("SUPABASE_TEST_REF", "")
-MCP_SERVER_SLUG = os.getenv("MCP_SERVER_SLUG", "JiayuuWang/supabase-mcp")
+MCP_SERVER_SLUG = os.getenv("MCP_SERVER_SLUG", "JiayuWang/supabase-mcp")
 MODEL = os.getenv("DEDALUS_TEST_MODEL", "anthropic/claude-sonnet-4-5")
 
 REQUIRED_TOOLS = [

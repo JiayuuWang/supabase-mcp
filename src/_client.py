@@ -137,8 +137,8 @@ async def main() -> int:
     from dedalus_mcp.auth import SecretValues
 
     creds = [
-        SecretValues(_rebind(supabase, MCP_SERVER_SLUG), key=SUPABASE_SECRET_KEY),
-        SecretValues(_rebind(supabase_mgmt, MCP_SERVER_SLUG), token=SUPABASE_ACCESS_TOKEN),
+        SecretValues(supabase, key=SUPABASE_SECRET_KEY),
+        SecretValues(supabase_mgmt, token=SUPABASE_ACCESS_TOKEN),
     ]
 
     client = AsyncDedalus(

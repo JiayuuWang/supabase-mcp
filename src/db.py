@@ -18,7 +18,7 @@ from dedalus_mcp.auth import Connection, SecretKeys
 from dedalus_mcp.types import ToolAnnotations
 
 supabase = Connection(
-    name="JiayuWang-supabase-mcp",
+    name="supabase-mcp",
     secrets=SecretKeys(key="SUPABASE_SECRET_KEY"),
     auth_header_name="apikey",
     auth_header_format="{api_key}",

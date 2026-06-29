@@ -54,7 +54,7 @@ DEDALUS_AS_URL = os.getenv("DEDALUS_AS_URL", "https://as.dedaluslabs.ai")
 SUPABASE_SECRET_KEY = os.getenv("SUPABASE_SECRET_KEY", "")
 SUPABASE_ACCESS_TOKEN = os.getenv("SUPABASE_ACCESS_TOKEN", "")
 SUPABASE_TEST_REF = os.getenv("SUPABASE_TEST_REF", "")
-MCP_SERVER_SLUG = os.getenv("MCP_SERVER_SLUG", "JiayuWang(王嘉宇)/supabase-mcp")
+MCP_SERVER_SLUG = os.getenv("MCP_SERVER_SLUG", "JiayuWang/supabase-mcp")
 MODEL = os.getenv("DEDALUS_TEST_MODEL", "anthropic/claude-sonnet-4-5")
 
 REQUIRED_TOOLS = [
@@ -145,7 +145,7 @@ async def main() -> int:
 
     # _rebind uses slug_to_connection_name(slug) for primary connection;
     # mgmt connection appends its original suffix to the computed slug name.
-    slug_conn_name = _s2c(MCP_SERVER_SLUG)  # e.g. JiayuWang(王嘉宇)-supabase-mcp
+    slug_conn_name = _s2c(MCP_SERVER_SLUG)  # e.g. JiayuWang-supabase-mcp
     creds = [
         SecretValues(_rebind(supabase, MCP_SERVER_SLUG), key=SUPABASE_SECRET_KEY),
         SecretValues(

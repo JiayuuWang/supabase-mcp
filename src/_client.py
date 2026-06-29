@@ -86,26 +86,30 @@ REQUIRED_TOOLS = [
 ]
 
 
-def _passed(tool_name: str, output: str) -> bool:
-    if not output:
+def _passed(tool_name: str, tool_events: list) -> bool:
+    """A tool counts as exercised if it was successfully called.
+    
+    Checks on_tool_event records for actual tool invocation with the expected name.
+    """
+    if not tool_events:
         return False
-    lowered = output.lower()
-    hard_failures = (
-        "no tool",
-        "tool not found",
-        "unknown tool",
-        "could not call",
-        "no active context",
-        "modulenotfounderror",
-        "importerror",
-        "currently unavailable",
-        "mcp server",
-    )
-    return not any(marker in lowered for marker in hard_failures)
+    
+    for event in tool_events:
+        if hasattr(event, 'name') and tool_name in event.name:
+            return True
+        if isinstance(event, dict) and tool_name in event.get('name', ''):
+            return True
+    
+    return False
 
 
 async def _run_tool(runner, creds, tool_name: str, instruction: str) -> bool:
     print(f"\n--- {tool_name} ---")
+    tool_events = []
+    
+    def on_tool_event(event):
+        tool_events.append(event)
+    
     try:
         result = await runner.run(
             input=instruction,
@@ -114,10 +118,13 @@ async def _run_tool(runner, creds, tool_name: str, instruction: str) -> bool:
             credentials=creds,
             max_steps=8,
             max_tokens=4096,
+            on_tool_event=on_tool_event,
         )
         output = getattr(result, "output", str(result)) or ""
         print(output[:600])
-        ok = _passed(tool_name, output)
+        ok = _passed(tool_name, tool_events)
+        if ok:
+            print(f"✓ Tool called: {len(tool_events)} invocation(s)")
     except Exception as exc:  # noqa: BLE001
         print(f"exception: {exc!r}")
         ok = False
